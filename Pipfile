@@ -8,6 +8,8 @@ black = "*"
 flake8 = "*"
 coverage = "*"
 isort = "*"
+faker = "*"
+mypy = "*"
 
 [dev-packages]
 
