@@ -147,9 +147,7 @@ class TestTicTacTack(unittest.TestCase):
         result = g.game()
         self.assertEqual(result, "Ничья!")
 
-    @unittest.mock.patch(
-        "builtins.input", side_effect=["1, 1", "0, 1", "2, 2", "-1"]
-    )
+    @unittest.mock.patch("builtins.input", side_effect=["1, 1", "0, 1", "2, 2", "-1"])
     def test_game_exit(self, out, mock_input):
         g = TicTacGame()
         result = g.game()

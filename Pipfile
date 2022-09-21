@@ -10,6 +10,7 @@ coverage = "*"
 isort = "*"
 faker = "*"
 mypy = "*"
+pylint = "*"
 
 [dev-packages]
 
