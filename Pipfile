@@ -11,6 +11,7 @@ isort = "*"
 faker = "*"
 mypy = "*"
 pylint = "*"
+parameterized = "*"
 
 [dev-packages]
 
