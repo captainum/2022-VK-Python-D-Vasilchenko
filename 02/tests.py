@@ -4,7 +4,7 @@ from unittest.mock import Mock
 
 from faker import Faker
 
-from json_parser import parse_json
+from json_parser import parse_json, NoKeywordCallbackError
 
 
 fake = Faker()
@@ -76,3 +76,13 @@ class TestJsonParser(unittest.TestCase):
         )
 
         self.assertEqual(self.mock_func.call_count, 0)
+
+    def test_callback_is_none(self):
+        self.assertRaises(
+            NoKeywordCallbackError,
+            parse_json,
+            json_str=self.json_to_parse,
+            required_fields=self.last_names,
+            keywords=self.first_names,
+            keyword_callback=None,
+        )
