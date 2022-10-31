@@ -12,6 +12,11 @@ faker = "*"
 mypy = "*"
 pylint = "*"
 parameterized = "*"
+requests = "*"
+beautifulsoup4 = "*"
+lxml = "*"
+cython = "*"
+numpy = "*"
 
 [dev-packages]
 
