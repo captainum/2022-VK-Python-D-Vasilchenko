@@ -17,6 +17,9 @@ beautifulsoup4 = "*"
 lxml = "*"
 cython = "*"
 numpy = "*"
+aiohttp = "*"
+aiounittest = "*"
+asynctest = "*"
 
 [dev-packages]
 
