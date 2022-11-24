@@ -20,6 +20,7 @@ numpy = "*"
 aiohttp = "*"
 aiounittest = "*"
 asynctest = "*"
+memory-profiler = "*"
 
 [dev-packages]
 
