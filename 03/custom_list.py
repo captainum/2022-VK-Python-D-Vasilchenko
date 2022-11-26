@@ -25,16 +25,16 @@ class CustomList(List):
         return CustomList(other) - self
 
     def __eq__(self, other: Union["CustomList", List]) -> bool:
-        return sum(self[:]) == sum(other[:])
+        return sum(self) == sum(other)
 
     def __ne__(self, other: Union["CustomList", List]) -> bool:
         return not self == other
 
     def __lt__(self, other: Union["CustomList", List]) -> bool:
-        return sum(self[:]) < sum(other[:])
+        return sum(self) < sum(other)
 
     def __le__(self, other: Union["CustomList", List]) -> bool:
-        return sum(self[:]) <= sum(other[:])
+        return sum(self) <= sum(other)
 
     def __gt__(self, other: Union["CustomList", List]) -> bool:
         return not self <= other
@@ -43,14 +43,10 @@ class CustomList(List):
         return not self < other
 
     def __neg__(self) -> "CustomList":
-        return CustomList([-x for x in self._elements()])
+        return CustomList([-x for x in self])
 
     def __str__(self) -> str:
         return (
-            f"Elements: {self._elements()}\n"
-            f"Summary: {sum(self._elements())}"
+            f"Elements: {self[:]}\n"
+            f"Summary: {sum(self)}"
         )
-
-    def _elements(self) -> List:
-        length = super().__len__()
-        return super().__getitem__(slice(0, length))
