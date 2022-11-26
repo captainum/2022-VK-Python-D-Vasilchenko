@@ -14,7 +14,7 @@ Name             Stmts   Miss  Cover   Missing
 ----------------------------------------------
 filter_file.py      13      0   100%
 lru_cache.py        24      0   100%
-tests.py            33      0   100%
+tests.py            57      0   100%
 ----------------------------------------------
-TOTAL               70      0   100%
+TOTAL               94      0   100%
 ````
