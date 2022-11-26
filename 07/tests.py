@@ -4,7 +4,7 @@
 # pylint: disable=invalid-name
 # pylint: disable=redundant-keyword-arg
 # pylint: disable=wrong-import-order
-
+# pylint: disable=too-many-locals
 
 import unittest
 from typing import Tuple, List
@@ -170,5 +170,11 @@ class TestMatrix(unittest.TestCase):
         start_C = time.time()
         self.matrix_calc(np_matrix_1, np_matrix_2, np_matrix_3, n, k, m)
         stop_C = time.time()
+
+        python_timings = stop_py - start_py
+        c_timings = stop_C - start_C
+
+        print("\nPython timings:", python_timings)
+        print("C timings:", c_timings)
 
         assert stop_C - start_C < stop_py - start_py
