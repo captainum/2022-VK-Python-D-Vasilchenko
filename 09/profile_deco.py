@@ -5,6 +5,7 @@
 # pylint: disable=unused-argument
 # pylint: disable=unnecessary-dunder-call
 # pylint: disable=invalid-name
+# pylint: disable=import-outside-toplevel
 
 import cProfile
 import io
@@ -28,7 +29,9 @@ def profile_deco(func):
         result = func(*args, **kwargs)
         func.profiler.disable()
 
-        ps = pstats.Stats(func.profiler, stream=func.stream).sort_stats("cumulative")
+        ps = pstats.Stats(func.profiler, stream=func.stream).sort_stats(
+            "cumulative"
+        )
         ps.print_stats()
 
         func.profiler.clear()
@@ -39,9 +42,11 @@ def profile_deco(func):
 
 
 if __name__ == "__main__":
+
     @profile_deco
     def add(a, b):
         import time
+
         time.sleep(2)
         return a + b
 
