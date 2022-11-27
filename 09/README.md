@@ -294,3 +294,29 @@ GraphWeakrefs
 ````
 
 Результаты аналогичны первому пункту.
+
+### 3. Декоратор для профилирования
+
+Результаты профилирования функции, использовавшейся в качестве примера
+использования декоратора
+
+```
+         3 function calls in 2.002 seconds
+
+   Ordered by: cumulative time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    2.002    2.002 profile_deco.py:43(add)
+        1    2.002    2.002    2.002    2.002 {built-in method time.sleep}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
+         3 function calls in 2.004 seconds
+
+   Ordered by: cumulative time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    2.004    2.004 profile_deco.py:43(add)
+        1    2.004    2.004    2.004    2.004 {built-in method time.sleep}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+```

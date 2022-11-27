@@ -10,37 +10,42 @@ import cProfile
 import io
 import pstats
 from functools import wraps
-from time import time
 
 
 def profile_deco(func):
-    if "stats" not in func.__dir__():
-        setattr(func, "stats", {})
+    if "profiler" not in func.__dir__():
+        setattr(func, "profiler", cProfile.Profile())
+        setattr(func, "stream", io.StringIO())
 
-        def print_stats():
-            for start_time, stats in func.stats.items():
-                print(
-                    f"START_TIME: {start_time}", stats.getvalue(), sep="\n\n"
-                )
+        def print_stat():
+            print(func.stream.getvalue())
 
-        setattr(func, "print_stats", print_stats)
+        setattr(func, "print_stat", print_stat)
 
     @wraps(func)
     def wrapper(*args, **kwargs):
-        pr = cProfile.Profile()
-
-        start_time = time()
-        pr.enable()
+        func.profiler.enable()
         result = func(*args, **kwargs)
-        pr.disable()
+        func.profiler.disable()
 
-        s = io.StringIO()
-        sortby = "cumulative"
-        ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
+        ps = pstats.Stats(func.profiler, stream=func.stream).sort_stats("cumulative")
         ps.print_stats()
 
-        func.stats[start_time] = s
+        func.profiler.clear()
 
         return result
 
     return wrapper
+
+
+if __name__ == "__main__":
+    @profile_deco
+    def add(a, b):
+        import time
+        time.sleep(2)
+        return a + b
+
+    add(1, 2)
+    add(4, 5)
+
+    add.print_stat()
