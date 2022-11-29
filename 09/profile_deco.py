@@ -16,10 +16,14 @@ from functools import wraps
 def profile_deco(func):
     if "profiler" not in func.__dir__():
         setattr(func, "profiler", cProfile.Profile())
-        setattr(func, "stream", io.StringIO())
 
         def print_stat():
-            print(func.stream.getvalue())
+            stream = io.StringIO()
+            ps = pstats.Stats(func.profiler, stream=stream).sort_stats(
+                "cumulative"
+            )
+            ps.print_stats()
+            print(stream.getvalue())
 
         setattr(func, "print_stat", print_stat)
 
@@ -28,13 +32,6 @@ def profile_deco(func):
         func.profiler.enable()
         result = func(*args, **kwargs)
         func.profiler.disable()
-
-        ps = pstats.Stats(func.profiler, stream=func.stream).sort_stats(
-            "cumulative"
-        )
-        ps.print_stats()
-
-        func.profiler.clear()
 
         return result
 
