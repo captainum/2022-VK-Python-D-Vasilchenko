@@ -22,6 +22,25 @@ class TestLRUCache(unittest.TestCase):
         self.assertIsNone(cache["k1"])
         self.assertEqual(cache["k2"], "val2")
 
+    def test_cache_capacity_2(self):
+        cache = LRUCache(2)
+
+        cache["k1"] = "val1"
+        cache["k2"] = "val2"
+
+        cache["k3"] = "val3"
+
+        self.assertIsNone(cache["k1"])
+        self.assertEqual(cache["k2"], "val2")
+        self.assertEqual(cache["k3"], "val3")
+
+        cache["k4"] = "val4"
+
+        self.assertIsNone(cache["k1"])
+        self.assertIsNone(cache["k2"])
+        self.assertEqual(cache["k3"], "val3")
+        self.assertEqual(cache["k4"], "val4")
+
     def test_cache_capacity_3(self):
         cache = LRUCache(3)
 
